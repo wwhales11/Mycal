@@ -1,0 +1,116 @@
+<html>
+
+<head>
+	<title>loan</title>
+	<meta name=viewport content="width=device-width, initial-scale=1, user-scalable=0">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" href="../css/common.css">
+	<style>
+	table {
+		font-size: 1.1em;
+	}
+	input[type=text] {
+		position: relative;
+		width: 70%;
+		height: 45%;
+		font-size: 100%;
+		text-align: center;
+		text-overflow: ellipsis;
+	}
+	input[type=button] {
+		width: 40%;
+		height: 90%;
+		font-size: 100%;
+		color: #747070;
+		border: 1px solid #bbb;
+	}
+		</style>
+	<script language="JavaScript">
+		function calculate() {
+			var principal = document.loandata.principal.value;
+			var interest = document.loandata.interest.value / 100 / 12;
+			var payments = document.loandata.years.value * 12;
+
+			var x = Math.pow(1 + interest, payments);
+			var monthly = (principal * x * interest) / (x - 1);
+
+			if (!isNaN(monthly) &&
+				(monthly != Number.POSITIVE_INFINITY) &&
+				(monthly != Number.NEGATIVE_INFINITY)) {
+
+				document.loandata.payment.value = round(monthly);
+				document.loandata.total.value = round(monthly * payments);
+				document.loandata.totalinterest.value =
+					round((monthly * payments) - principal);
+			} else {
+				document.loandata.payment.value = "";
+				document.loandata.total.value = "";
+				document.loandata.totalinterest.value = "";
+			}
+		}
+
+		function round(x) {
+			return Math.round(x * 100) / 100;
+		}
+	</script>
+</head>
+
+<body>
+	<div id="header-area" class="section">
+		<a href="javascript:history.back();">
+			<h3>한다 계산</h3>
+		</a>
+	</div>
+	<div id="contents-area" class="section">
+<form name="loandata">
+		<table>
+			<tr>
+				<td colspan="3"><b>대출 금액 및 이자율 입력</b></td>
+			</tr>
+			<tr>
+				<td>1)</td>
+				<td>대출 금액입력</td>
+				<td><input type="text" name="principal" size="12" onchange="calculate();"> 원</td>
+			</tr>
+			<tr>
+				<td>2)</td>
+				<td>이자율(%)</td>
+				<td><input type="text" name="interest" size="12" onchange="calculate();"> %</td>
+			</tr>
+			<tr>
+				<td>3)</td>
+				<td>대출기간(년)</td>
+				<td><input type="text" name="years" size="12" onchange="calculate();"> 년</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<input type="button" value="계산" onclick="calculate();">&nbsp;&nbsp;<input type="button" value="다시입력" onclick="reset();">
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<b>상환내역</b>
+				</td>
+			</tr>
+			<tr>
+				<td>4)</td>
+				<td>월불입금</td>
+				<td><input type="text" name="payment" size="12"> 원</td>
+			</tr>
+			<tr>
+				<td>5)</td>
+				<td>원금 및 이자합계</td>
+				<td><input type="text" name="total" size="12"> 원</td>
+			</tr>
+			<tr>
+				<td>6)</td>
+				<td>이자금액</td>
+				<td><input type="text" name="totalinterest" size="12"> 원</td>
+			</tr>
+		</table>
+</form>
+	</div>
+
+</body>
+
+</html>

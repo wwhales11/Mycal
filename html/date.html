@@ -1,0 +1,188 @@
+<html>
+
+<head>
+	<title>date</title>
+	<meta name=viewport content="width=device-width, initial-scale=1, user-scalable=0">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" href="../css/common.css">
+	<style type="text/css">
+		table {}
+
+		input[type=text] {
+			position: relative;
+			width: 20%;
+			height: 30%;
+			font-size: 100%;
+			text-align: center;
+			text-overflow: ellipsis;
+		}
+
+		input[type=button] {
+			width: 30%;
+			height: 30%;
+			font-size: 100%;
+			color: #747070;
+			border: 1px solid #bbb;
+		}
+	</style>
+	<script language="javascript">
+		function check1() {
+			var str = document.mmm.m_year.value.length;
+			if (str == 4) {
+				document.mmm.m_month.focus();
+				document.mmm.m_month.select();
+			}
+		}
+
+		function check2() {
+			var str = document.mmm.m_month.value.length;
+			if (str == 2) {
+				document.mmm.m_day.focus();
+				document.mmm.m_day.select();
+			}
+		}
+
+
+		function calcu() {
+			m_year = eval(document.mmm.m_year.value);
+			m_month = eval(document.mmm.m_month.value);
+			m_day = eval(document.mmm.m_day.value);
+			if (m_year == "") {
+				alert("그(녀)와 처음 만난 년도 등록");
+				document.mmm.m_year.focus();
+				return true;
+			} else if (m_year < 1800) {
+				alert("1800년 이후부터 계산이 가능합니다");
+			}
+			if (m_month == "" || (m_month < 1 || m_month > 12)) {
+				alert("그(녀)와 처음 만난 월[1월~12월]을 등록");
+				document.mmm.m_month.focus();
+				return true;
+			}
+			if (m_day == "" || (m_day < 1 || m_day > 31)) {
+				alert("그(녀)와 처음 만난 날자[1일~31일]을 등록");
+				document.mmm.m_day.focus();
+				return true;
+			}
+			var Meet = new Date(m_year, m_month - 1, m_day);
+			var M_now = new Date();
+
+			distencet = M_now.getTime() - Meet.getTime();
+			document.mmm.resul.value = Math.floor((1 + distencet / (1000 * 60 * 60 * 24)));
+		}
+
+		function calcu_plan() {
+			m_year = eval(document.mmm.m_year.value);
+			m_month = eval(document.mmm.m_month.value);
+			m_day = eval(document.mmm.m_day.value);
+			if (m_year == "") {
+				alert("그(녀)와 처음 만난 년도 등록");
+				document.mmm.m_year.focus();
+				return true;
+			} else if (m_year < 1800) {
+				alert("1900년 이후부터 계산이 가능합니다");
+			}
+			if (m_month == "" || (m_month < 1 || m_month > 13)) {
+				alert("그(녀)와 처음 만난 월[1월~12월]을 등록");
+				document.mmm.m_month.focus();
+				return true;
+			}
+			if (m_day == "" || (m_day < 1 || m_day > 31)) {
+				alert("그(녀)와 처음 만난 날자[1일~31일]을 등록");
+				document.mmm.m_day.focus();
+				return true;
+			}
+
+			plann = eval(document.mmm.plann.value);
+			if (plann == "" || plann < 1) {
+				alert("기념일이 될 기간을 적어 주십시오..!!");
+				document.mmm.plann.focus();
+				return true;
+			}
+			var dayStr = m_month + "-" + m_day + "-" + m_year;
+			var Meet = new Date(dayStr);
+			Meet = Meet;
+			var annitime = Meet.getTime() + plann * 1000 * 3600 * 24 - 1
+			var anniday = new Date();
+			anniday.setTime(annitime);
+			document.mmm.p_month.value = anniday.getMonth() + 1;
+			document.mmm.p_year.value = (anniday.getYear() < 100) ? "19" + anniday.getYear() : 1900 + anniday.getYear();
+			document.mmm.p_date.value = anniday.getDate();
+			document.mmm.dow.value = dow[anniday.getDay()];
+		}
+		var dow = new Array(7);
+		dow[0] = "일";
+		dow[1] = "월";
+		dow[2] = "화";
+		dow[3] = "수";
+		dow[4] = "목";
+		dow[5] = "금";
+		dow[6] = "토";
+	</script>
+</head>
+
+<body>
+	<div id="header-area" class="section">
+		<a href="javascript:history.back();">
+			<h3>한다 계산</h3>
+		</a>
+	</div>
+	<div id="contents-area" class="section">
+		<table>
+			<form name="mmm">
+				<tr>
+					<td><B>만남일 입력</B><br /><br />
+				</tr>
+				<tr>
+					<td>
+						<input type="text" name="m_year" value="" size="4" maxlength=4 onKeyUp="check1()"> 년
+						<input type="text" name="m_month" value="" size="2" maxlength=2 onKeyUp="check2()"> 월
+						<input type="text" name="m_day" value="" size="2" maxlength=2>일<br /><br />
+						<input type="button" value="계산하기" onClick="javascript:calcu()"><br /><br />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<script language="JavaScript">
+							<!--
+							function printDate() {
+								var today = new Date();
+								var year = today.getYear();
+								if (year < 1900) year += 1900;
+								var month = today.getMonth();
+								var date = today.getDate();
+								document.write(" 오늘은 " + year + "년 " + (month + 1) + "월 " + date + "일 " + "로부터");
+							}
+							printDate()
+							//
+							-->
+						</script>
+						<input type="text" name="resul" value="" size="7" maxlength="7"> 일째 되는 날입니다.
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<hr color="black" width=90%>
+					</td>
+				</tr>
+				<tr>
+					<td style="font-size:0.8em">
+						우리가만난지 <input type="text" name="plann" value="" size="5" maxlength=8>일째 되는 날은?<br><br>
+						<input type="button" value="계산하기" onClick="javascript:calcu_plan()">
+					</td>
+				</tr>
+
+				<tr>
+					<td>
+						<input type="text" name="p_year" value="" size="4" maxlength="4">년
+						<input type="text" name="p_month" value="" size="2" maxlength="2">월
+						<input type="text" name="p_date" value="" size="2" maxlength="2">일
+						<input type="text" name="dow" value="" size="2" maxlength="2">요일 입니다.
+					</td>
+
+			</form>
+		</table>
+	</div>
+</body>
+
+</html>

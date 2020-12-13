@@ -1,0 +1,71 @@
+<html>
+
+<head>
+	<title>hot</title>
+	<meta name=viewport content="width=device-width, initial-scale=1, user-scalable=0">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" href="../css/common.css">
+	<style type="text/css">
+
+		input[type=text] {
+			position: relative;
+			width: 50%;
+			height: 10%;
+			box-sizing: border-box;
+			font-size: 100%;
+			text-align: right;
+		}
+
+		input[type=button] {
+			width: 55%;
+			height: 30%;
+			font-size: 100%;
+			color: #747070;
+			border: 1px solid #bbb;
+		}
+	</style>
+	<SCRIPT LANGUAGE="JavaScript">
+		function show() {
+			var far = document.degin.far.value
+			var deg = (far - 32) * 5 / 9
+			document.degin.cel.value = deg
+		}
+
+		function showt() {
+			var cels = document.itt.celt.value
+			var fin = (cels * 9 / 5) + 32
+			document.itt.fartw.value = fin
+		}
+	</script>
+</head>
+
+<body>
+	<div id="header-area" class="section" onclick="main.html">
+		<a href="javascript:history.back();"><h3>한다 계산</h3></a>
+	</div>
+	<div id="contents-area" class="section">
+		<table>
+			<tr>
+				<td><B>섭씨(Celsius) → 화씨(Fahrenheit) </B><br><br>
+					<form name="itt">
+					<input type="text" name="celt" size="10"> °C<br><br>
+					<input type="button" value="°C  → °F" onClick="showt()"><br><br>
+					<input type="text" name="fartw" size="10"> °F
+					</form>
+				</td>
+			</tr>
+			<tr><td><hr color="black" width=90%></td></tr>
+			<tr>
+				<td><B>화씨(Fahrenheit) → 섭씨(Celsius)</B><br><br>
+					<form name="degin">
+					<input type="text" name="far" size="10"> °F<br><br>
+					<input type="button" value="°F  → °C" onClick="show()"><br><br>
+					<input type="text" name="cel" size="10"> °C
+				</form>
+				</td>
+			</tr>
+		</table>
+	</div>
+</body>
+
+</html>

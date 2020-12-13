@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta name=viewport content="width=device-width, initial-scale=1, user-scalable=0">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>index</title>
+	<style>
+		.logo {
+			position: absolute;
+			left: 0px;
+			top: 40%;
+			width: 80%;
+			margin: 0 10%;
+			text-align: center;
+			font-size: 3em;
+			font-weight: bold;
+			color: #36D;
+			animation: fadein 3s;
+			-moz-animation: fadein 3s;
+			/* Firefox */
+			-webkit-animation: fadein 3s;
+			/* Safari and Chrome */
+			-o-animation: fadein 3s;
+			/* Opera */
+		}
+
+		@keyframes fadein {
+			from {
+				opacity: 0;
+			}
+
+			to {
+				opacity: 1;
+			}
+		}
+
+		@-moz-keyframes fadein {
+
+			/* Firefox */
+			from {
+				opacity: 0;
+			}
+
+			to {
+				opacity: 1;
+			}
+		}
+
+		@-webkit-keyframes fadein {
+
+			/* Safari and Chrome */
+			from {
+				opacity: 0;
+			}
+
+			to {
+				opacity: 1;
+			}
+		}
+
+		@-o-keyframes fadein {
+
+			/* Opera */
+			from {
+				opacity: 0;
+			}
+
+			to {
+				opacity: 1;
+			}
+		}
+	</style>
+</head>
+
+<body>
+	<div class="logo">한다<br>계산</div>
+</body>
+
+<script type="text/javascript">
+	setTimeout(function() {
+		window.location.href = "main.html";
+	}, 3000);
+</script>
+
+</html>

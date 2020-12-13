@@ -1,0 +1,141 @@
+<html>
+
+<head>
+	<title>bmi</title>
+	<meta name=viewport content="width=device-width, initial-scale=1, user-scalable=0">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" href="../css/common.css">
+	<style type="text/css">
+		table {
+			height: 38%;
+			font-size: 1em;
+		}
+
+		input[type=text] {
+			position: relative;
+			width: 80%;
+			height: 60%;
+			box-sizing: border-box;
+			font-size: 100%;
+			text-align: center;
+		}
+
+		select {
+			position: relative;
+			width: 100%;
+			height: 60%;
+			box-sizing: border-box;
+			font-size: 100%;
+			text-align: left;
+
+		}
+
+		input[type=button],
+		[type=reset] {
+			width: 40%;
+			height: 60%;
+			font-size: 100%;
+			color: #747070;
+			border: 1px solid #bbb;
+		}
+	</style>
+	<script type="text/javascript">
+		function bmi() {
+			var w = parseFloat(document.frm.txtWeight.value);
+			var h = parseInt(document.frm.txtHeight.value);
+			var errors = '';
+			if (document.frm.opHeight.value == "Inch") {
+				h = h * 2.54;
+			}
+			if (document.frm.opWeight.value == "Lb") {
+				w = w * 0.4536;
+			}
+			if ((w < 20) || (w > 200) || isNaN(w)) {
+				errors += '몸무게를 정확히 입력하세요.\n';
+			}
+			if ((h < 100) || (h > 250) || isNaN(h)) {
+				errors += '키를 정확히 입력하세요.\n';
+			}
+			if (errors) {
+				alert(errors);
+				return 0;
+			}
+			document.getElementById('feedback').innerHTML = 'Your BMI is ' + Math.round(10 * ((w * 10000 / (h * h)))) / 10;
+		}
+
+		function resetAll() {
+			document.getElementById('feedback').innerHTML = "";
+			return true;
+		}
+	</script>
+</head>
+
+<body>
+	<div id="header-area" class="section">
+		<a href="javascript:history.back();">
+			<h3>한다 계산</h3>
+		</a>
+	</div>
+	<div id="contents-area" class="section">
+		<form name="frm" id="cal_frm" onsubmit="return false">
+			<table id="cal_data">
+				<tr>
+					<td style="padding-left:5px;">키:</td>
+					<td><input class="cal_text" type="text" name="txtHeight" size="10" maxlength="10"></td>
+					<td><select class="cal_option" name="opHeight">
+							<option value="Cm">Cm</option>
+							<option value="Inch">Inch</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td style="padding-left:5px;">몸무게:</td>
+					<td><input class="cal_text" type="text" name="txtWeight" size="10" maxlength="10"></td>
+					<td><select class="cal_option" name="opWeight">
+							<option value="Kg">Kg</option>
+							<option value="Lb">Pound</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="3" id="feedback" style="border:none; font-weight:600; color:#555555; font-family:tahoma;"></td>
+				</tr>
+				<tr>
+					<td colspan="4" style="border:none;">
+						<input onclick="bmi()" class="cal_button" type="button" value="계산">&nbsp;&nbsp;
+						<input onclick="resetAll()" type="reset" value="다시입력" class="cal_button">
+					</td>
+				</tr>
+			</table>
+		</form>
+
+
+		<h2>BMI for adult:</h2>
+		<div style="width:100%;">
+			<table border="1px" width="350px;" cellpadding="2px" style="font-size:12px; border-collapse:collapse; border-color:Gray; background-color:White;">
+				<tr>
+					<td style="padding-left:10px;"><b>BMI</b></td>
+					<td style="padding-left:10px;"><b>상태</b></td>
+				</tr>
+				<tr>
+					<td style="padding-left:10px;">18.5밑으로</td>
+					<td style="padding-left:10px;">저체중</td>
+				</tr>
+				<tr>
+					<td style="padding-left:10px;">18.5 ~ 24.9</td>
+					<td style="padding-left:10px;">표준</td>
+				</tr>
+				<tr>
+					<td style="padding-left:10px;">25 ~ 29.9</td>
+					<td style="padding-left:10px;">비만위험</td>
+				</tr>
+				<tr>
+					<td style="padding-left:10px;">30.0 또는 이상</td>
+					<td style="padding-left:10px;">비만</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</body>
+
+</html>
